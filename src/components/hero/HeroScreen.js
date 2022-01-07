@@ -3,17 +3,21 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getHeroById } from '../../selectors/getHeroById';
 
 export const HeroScreen = () => {
+
     const { heroeId} = useParams();
-
-    const hero = useMemo(()=>
-        getHeroById(heroeId), [heroeId] );
-
     const navigate = useNavigate();
+
+    const hero = useMemo( () => getHeroById(heroeId), [ heroeId ]);
+
 
     const handleReturn = () =>{
         navigate(-1);
     }
 
+    if(!hero){
+        return <Navigate to='/'/>
+    }
+    
     const {
         id,
         superhero,
@@ -23,9 +27,6 @@ export const HeroScreen = () => {
         characters,
     }= hero;
 
-    if(!hero){
-        return <Navigate to='/'/>
-    }
 
     const imagenPath = `/assets/${id}.jpg`;
 
