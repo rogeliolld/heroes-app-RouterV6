@@ -1,6 +1,9 @@
 import React, { useMemo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { getHeroById } from '../../selectors/getHeroById';
+import { heroeImages } from '../helpers/heroImages';
+
+// import batman from '../../assets/dc-batman.jpg'; Recurso Estatico
 
 export const HeroScreen = () => {
 
@@ -28,13 +31,15 @@ export const HeroScreen = () => {
     }= hero;
 
 
-    const imagenPath = `/assets/${id}.jpg`;
+    // const imagenPath = `/assets/${id}.jpg`;
 
     return (
         <div className='row mt-5'>
             <div className='col-4'>
                 <img 
-                   src={ imagenPath }
+                //    src={ imagenPath } Desde public/assets
+                //    src={ batman } Con importancion estatica
+                   src={ heroeImages(`./${id}.jpg`)}
                    alt={superhero}
                    className='img-thumbnail animate__animated animate__fadeInLeftBig'
                 />
